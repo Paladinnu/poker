@@ -15,4 +15,4 @@ Open `index.html` directly in your browser or serve the folder with any static f
 python -m http.server 8000
 ```
 
-Visit [http://localhost:8000](http://localhost:8000) to preview the player lounge and felt simulation.
+Visit [http://localhost:8000](http://localhost:8000) to interact with the dashboard, integrity overlays, and live table controls.
