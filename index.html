@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>G-Barrio Poker Lounge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <img src="g-barrio-logo.svg" alt="G-Barrio" class="logo" />
+      <div>
+        <p class="eyebrow">G-Barrio lounge</p>
+        <strong>Player circuit</strong>
+      </div>
+    </div>
+    <div class="top-meta">
+      <span class="pill">Private tables</span>
+      <span class="pill">Secured buy-ins</span>
+      <span class="pill">No spectators</span>
+      <div class="top-actions">
+        <button class="ghost" id="swap-theme">Calm mode</button>
+        <button class="primary" id="rebuy">Quick rebuy</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="felt-column">
+      <div class="panel live-panel">
+        <div class="panel-header">
+          <div>
+            <p class="label">Live table</p>
+            <h3 id="table-title">Super Table A</h3>
+          </div>
+          <div class="inline-info">
+            <div>
+              <p class="mini">Blinds</p>
+              <strong id="blinds-display">25 / 50</strong>
+            </div>
+            <div>
+              <p class="mini">Pot</p>
+              <strong id="pot-display">$0</strong>
+            </div>
+            <div>
+              <p class="mini">Stage</p>
+              <strong id="stage-display">Waiting</strong>
+            </div>
+            <div>
+              <p class="mini">Dealer</p>
+              <strong id="dealer-display">–</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="table-shell">
+          <div class="table felt" id="poker-table">
+            <div class="board" id="board"></div>
+            <div id="seats" class="seats"></div>
+            <div class="dealer">D</div>
+            <div class="glow"></div>
+          </div>
+          <div class="pocket" id="my-pocket"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="hud-column">
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <p class="label">Session HUD</p>
+            <h3>Seat + stack</h3>
+          </div>
+          <span class="chip success" id="seat-state">Observing</span>
+        </div>
+        <div class="hud-grid">
+          <div>
+            <p class="mini">Handle</p>
+            <strong id="player-handle">You</strong>
+            <p class="muted">G-Barrio circuit verified</p>
+          </div>
+          <div>
+            <p class="mini">Stack</p>
+            <strong id="stack-display">$12,000</strong>
+            <p class="muted">Primary buy-in</p>
+          </div>
+          <div>
+            <p class="mini">Seat</p>
+            <strong id="seat-position">Not seated</strong>
+            <p class="muted">Tap take seat to join</p>
+          </div>
+          <div>
+            <p class="mini">Cards</p>
+            <strong id="card-status">Waiting</strong>
+            <p class="muted">Shown when you're in hand</p>
+          </div>
+        </div>
+        <div class="seat-actions">
+          <button class="primary" id="take-seat">Take seat</button>
+          <button class="ghost" id="leave-seat">Leave seat</button>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <p class="label">Actions</p>
+            <h3>Play the street</h3>
+          </div>
+          <span class="pill">Simulated</span>
+        </div>
+        <div class="control-group">
+          <div class="control-row">
+            <button id="start-hand" class="primary">Deal hand</button>
+            <button id="reset-hand" class="ghost">Clear</button>
+          </div>
+          <div class="control-row">
+            <button id="deal-flop" class="ghost" disabled>Flop</button>
+            <button id="deal-turn" class="ghost" disabled>Turn</button>
+            <button id="deal-river" class="ghost" disabled>River</button>
+          </div>
+          <div class="control-row">
+            <span class="active-player" id="active-player">Waiting...</span>
+          </div>
+          <div class="action-row">
+            <button id="btn-check">Check / Call</button>
+            <div class="bet-input">
+              <label class="mini" for="bet-size">Bet</label>
+              <input type="number" id="bet-size" min="5" step="5" value="25" />
+            </div>
+            <button class="primary" id="btn-bet">Bet / Raise</button>
+            <button class="danger" id="btn-fold">Fold</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <section class="meta-grid">
+    <div class="panel">
+      <div class="panel-header">
+        <div>
+          <p class="label">Table lobby</p>
+          <h3>Pick your seat</h3>
+        </div>
+        <button class="ghost" id="refresh">Refresh</button>
+      </div>
+      <div id="table-list" class="table-list"></div>
+    </div>
+
+    <div class="panel feed">
+      <div class="panel-header">
+        <div>
+          <p class="label">Live feed</p>
+          <h3>Action scroll</h3>
+        </div>
+        <span class="pill light">Realtime</span>
+      </div>
+      <div id="action-log" class="action-log"></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-header">
+        <div>
+          <p class="label">Stacks</p>
+          <h3>Table health</h3>
+        </div>
+        <span class="pill">Chips</span>
+      </div>
+      <div id="stack-health" class="health-grid"></div>
+    </div>
+  </section>
+
+  <script src="scripts.js"></script>
+</body>
+</html>
